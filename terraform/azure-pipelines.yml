@@ -23,6 +23,6 @@ stages:
     steps:
     - script: |
         echo "Deploying application to AKS using Kubernetes manifests"
-        kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
       displayName: Deploy to Kubernetes
