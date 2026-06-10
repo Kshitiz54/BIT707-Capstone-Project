@@ -22,7 +22,10 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - script: |
-        echo "Deploying application to AKS using Kubernetes manifests"
+        echo "Connecting to AKS..."
+        az aks get-credentials --resource-group BIT707-Capstone-RG --name bit707-aks --overwrite-existing
+
+        echo "Deploying application to AKS..."
         kubectl apply -f k8s/deployment.yaml
         kubectl apply -f k8s/service.yaml
       displayName: Deploy to Kubernetes
