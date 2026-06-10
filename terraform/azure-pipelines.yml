@@ -1,0 +1,28 @@
+trigger:
+- main
+
+stages:
+- stage: Build
+  displayName: Build Docker Image
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - script: |
+        echo "Building Docker image for BIT707 Capstone Project"
+        docker build -t bit707-app:v1 ./app
+      displayName: Build Docker Image
+
+- stage: Deploy
+  displayName: Deploy to AKS
+  jobs:
+  - job: DeployJob
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - script: |
+        echo "Deploying application to AKS using Kubernetes manifests"
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
+      displayName: Deploy to Kubernetes
